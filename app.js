@@ -16,20 +16,25 @@ function criarEstrelas (numero){
     return classificacao
 }
 
-function buscarPorItem(palavra){
+function buscarPorItem(categoria){
 
+    const produtoEncontrado =[]
     produtos.forEach(itemEscolhido => {
-        if(palavra=='Informática'){
-            itemEscolhido.imagem
-            itemEscolhido.nome
-            itemEscolhido.descricao
-            itemEscolhido.classificacao
-            itemEscolhido.preco
+        if(categoria == itemEscolhido.categoria){
+            const itens = {
+            imagem:itemEscolhido.imagem,
+            nome:itemEscolhido.nome,
+            descricao:itemEscolhido.descricao,
+            classificacao:itemEscolhido.classificacao,
+            preco:itemEscolhido.preco}
+
+            produtoEncontrado.push(itens)
+
         }
+        
     })
-    return itemEscolhido
+    return produtoEncontrado
 }
-console.log(buscarPorItem(Informática))
 
 function criarCard(produto){
     const card = document.createElement('div')
@@ -57,5 +62,19 @@ function criarCard(produto){
 }
 
 const cards = produtos.map(criarCard)
+const itensFiltrados = buscarPorItem('Informática');
+console.log(itensFiltrados)
 
 document.getElementById('container').replaceChildren(...cards)
+
+// // 1. Filtra os dados (já está fazendo)
+// const itensFiltrados = buscarPorItem('Eletrônicos');
+
+// // 2. Transforma os dados filtrados em elementos HTML (Cards)
+// const cardsFiltrados = itensFiltrados.map(criarCard);
+
+// // 3. Coloca os cards filtrados na tela
+// document.getElementById('container').replaceChildren(...cardsFiltrados);
+
+// // 4. Debug para conferir no console
+// console.log(itensFiltrados);
