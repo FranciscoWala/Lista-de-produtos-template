@@ -1,42 +1,50 @@
 'use strict'
 import produtos from "./produtos.json" with { type: "json"}
 
-function criarEstrelas (numero){
-    let estrelas = numero
-    let classificacao =''
 
-    for(let i=0; i<5; i++){
-        if(estrelas>0){
-            classificacao+= '★'
+function renderizarProdutos(listaDeProdutos) {
+    const container = document.getElementById('container')
+    const cards = listaDeProdutos.map(criarCard)
+    container.replaceChildren(...cards)
+}
+
+function criarEstrelas(numero) {
+    let estrelas = numero
+    let classificacao = ''
+
+    for (let i = 0; i < 5; i++) {
+        if (estrelas > 0) {
+            classificacao += '★'
             estrelas--
-        }else{
+        } else {
             classificacao += '☆'
         }
     }
     return classificacao
 }
 
-function buscarPorItem(categoria){
+function buscarPorItem(categoria) {
 
-    const produtoEncontrado =[]
+    const produtoEncontrado = []
     produtos.forEach(itemEscolhido => {
-        if(categoria == itemEscolhido.categoria){
+        if (categoria == itemEscolhido.categoria) {
             const itens = {
-            imagem:itemEscolhido.imagem,
-            nome:itemEscolhido.nome,
-            descricao:itemEscolhido.descricao,
-            classificacao:itemEscolhido.classificacao,
-            preco:itemEscolhido.preco}
+                imagem: itemEscolhido.imagem,
+                nome: itemEscolhido.nome,
+                descricao: itemEscolhido.descricao,
+                classificacao: itemEscolhido.classificacao,
+                preco: itemEscolhido.preco
+            }
 
             produtoEncontrado.push(itens)
 
         }
-        
+
     })
     return produtoEncontrado
 }
 
-function criarCard(produto){
+function criarCard(produto) {
     const card = document.createElement('div')
     card.className = 'card'
 
@@ -56,25 +64,21 @@ function criarCard(produto){
     const preco = document.createElement('h1')
     preco.textContent = `R$${produto.preco}`
 
-    card.append(foto,nome, descricao, classificacao, preco)
+    card.append(foto, nome, descricao, classificacao, preco)
 
     return card
 }
+function filtrarPorCategoria() {
 
-const cards = produtos.map(criarCard)
-const itensFiltrados = buscarPorItem('Informática');
-console.log(itensFiltrados)
+    //Informática
+    //Eletrônicos
 
-document.getElementById('container').replaceChildren(...cards)
+    const inputBuscador = document.getElementById('buscador')
+    const termoBusca = inputBuscador.value
+    const itensFiltrados = buscarPorItem(termoBusca)
 
-// // 1. Filtra os dados (já está fazendo)
-// const itensFiltrados = buscarPorItem('Eletrônicos');
+    renderizarProdutos(itensFiltrados)
+}
+renderizarProdutos(produtos)
+document.getElementById('button-sch').addEventListener('click', filtrarPorCategoria)
 
-// // 2. Transforma os dados filtrados em elementos HTML (Cards)
-// const cardsFiltrados = itensFiltrados.map(criarCard);
-
-// // 3. Coloca os cards filtrados na tela
-// document.getElementById('container').replaceChildren(...cardsFiltrados);
-
-// // 4. Debug para conferir no console
-// console.log(itensFiltrados);

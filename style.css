@@ -1,67 +1,150 @@
+:root {
+    /* Paleta de Cores */
+    --primary: #6366f1;       /* Indigo moderno */
+    --header-bg: #1e293b;     /* Slate escuro */
+    --body-bg: #f8fafc;       /* Cinza quase branco */
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-header div{
-    display: flex;
-    height: 10vh;
-    width:100dvw;
-    background-color: #c33c3c;
-    align-items: center;
-    justify-content: center;
-    /* object-position: top; */
-}
+
 body {
-    min-height: 80vh;
-    display: grid;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #eee4a1;
-    font-family: Arial, sans-serif;
+    background-color: var(--body-bg);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text-main);
+    line-height: 1.5;
+    min-height: 100vh;
 }
-#container {
+
+/* Header mais elegante */
+header {
+    background-color: var(--header-bg);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
-    justify-content: center;
+    gap: 15px;
 }
+
+/* Estilização do Buscador */
+#buscador {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #334155;
+    color: white;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#buscador:focus {
+    border-color: var(--primary);
+}
+
+#button-sch {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: filter 0.2s;
+}
+
+#button-sch:hover {
+    filter: brightness(1.1);
+}
+
+header a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+header a:hover {
+    color: white;
+}
+
+/* Container de Cards */
+#container {
+    max-width: 1200px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+    padding: 0 20px;
+}
+
+/* Card Estilizado */
 .card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    width: 220px;
-    padding: 20px 16px;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow);
+    border: 1px solid #f1f5f9;
 }
-.card img  {
-    transition: .2s;
-    width: 100px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50px;
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
-.card img:hover  {
-    width: 200px;
-    height: 120px;
+
+.card img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain; /* Melhor para fotos de produtos */
+    margin-bottom: 16px;
+    transition: transform 0.3s ease;
 }
+
+/* Efeito de zoom sem quebrar o layout */
+.card:hover img {
+    transform: scale(1.1);
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
 .card span {
-    text-align: center;
-}
-.card-info {
-    text-align: center;
-}
-.card-info h3 {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #111;
-    margin-bottom: 4px;
-}
-.card-info span {
     font-size: 0.85rem;
-    color: #666;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.card .classificacao {
+    color: #fbbf24; /* Cor de ouro para estrelas */
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.card h1 {
+    font-size: 1.4rem;
+    color: var(--primary);
+    font-weight: 700;
 }
